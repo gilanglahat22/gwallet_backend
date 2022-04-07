@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 
 // routes
-app.use("/users", userRoutes);
+// app.use("/users", userRoutes);
 
 // helpers
 app.use(commonHelper.helperNotFoundMessage);
