@@ -1,10 +1,6 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
   <h3 align="center">RESTful API with ExpressJS and MySQL Boilerplate</h3>
 
   <p align="center">
@@ -41,7 +37,7 @@ First thing first, make sure to install npm in your device.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/ferdianfh/boilerplate-expressjs-mysql.git
    ```
 2. Install NPM packages
    ```sh
