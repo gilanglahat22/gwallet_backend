@@ -33,6 +33,8 @@ First thing first, make sure to install npm in your device.
   npm install npm@latest -g
   ```
 
+or you can download NodeJS which npm already included.
+
 ### Installation
 
 1. Clone the repo
