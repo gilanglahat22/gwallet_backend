@@ -2,16 +2,16 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 
 const generateToken = (payload) => {
-  const secretKey = process.env.SECRET_KEY;
+  const secretKey = process.env.SECRET_KEY_JWT;
   const verifyOptions = {
     expiresIn: 60 * 60,
-    issuer: "ankasa"
+    issuer: "zwallet"
   };
   const result = jwt.sign(payload, secretKey, verifyOptions);
   return result;
 };
 
-const sendEmailVerification = async (emailTarget, token) => {
+const sendEmailVerification = async (email, token) => {
   const transporter = nodemailer.createTransport({
     host: `smtp.gmail.com`,
     port: 465,
@@ -22,9 +22,9 @@ const sendEmailVerification = async (emailTarget, token) => {
     }
   });
   const info = await transporter.sendMail({
-    from: `mail.app@gmail.com`,
-    to: emailTarget,
-    subject: `App User Registration Verification`,
+    from: `zwallet.wanda@gmail.com`,
+    to: email,
+    subject: `Zwallet User Registration Verification`,
     html: `
             <!DOCTYPE html>
             <html lang="en">
@@ -92,14 +92,14 @@ const sendEmailVerification = async (emailTarget, token) => {
             <body>
                 <div class="container">
                     <h1 class="title">
-                        Welcome to Ankasa Ticketing App!
+                        Welcome to Zwallet Web App!
                     </h1>
                     <hr />
                     <div class="parag">
                         Thank you for joining us! To continue the signin process, please click the button "Confirm" below to verify you account!
                     </div>
                     <div class="confirm">
-                        <a href="https://ankasa-app.herokuapp.com/users/email-verification/${token}" target="_blank"><button class="form-button">CONFIRM</button></a>
+                        <a href="http://localhost:3300/users/verification/${token}" target="_blank"><button class="form-button">CONFIRM</button></a>
                     </div>
                 </div>
             </body>
@@ -120,9 +120,9 @@ const sendEmailResetPasswordVerification = async (emailTarget, token) => {
     }
   });
   const info = await transporter.sendMail({
-    from: `mail.app@gmail.com`,
+    from: `zwallet.wanda@gmail.com`,
     to: emailTarget,
-    subject: `App Reset Password Email Verification`,
+    subject: `Zwallet Reset Password Email Verification`,
     html: `
             <!DOCTYPE html>
             <html lang="en">
@@ -200,7 +200,7 @@ const sendEmailResetPasswordVerification = async (emailTarget, token) => {
             <body>
                 <div class="container">
                     <h1 class="title">
-                        Ankasa - Reset Password
+                        Zwallet - Reset Password
                     </h1>
                     <hr />
                     <div class="parag">
@@ -218,7 +218,6 @@ const sendEmailResetPasswordVerification = async (emailTarget, token) => {
 };
 
 module.exports = {
-  response,
   generateToken,
   sendEmailVerification,
   sendEmailResetPasswordVerification

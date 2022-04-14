@@ -73,8 +73,25 @@ const updateProfileValidation = (req, res, next) => {
   }
 };
 
+const validatePhoneNumber = (req, res, next) => {
+  const { phone } = req.body;
+  const schema = Joi.object({
+    phone: Joi.string().min(5).max(16).required().regex(/[0-9]/)
+  }).options({ abortEarly: false });
+
+  const { error } = schema.validate({
+    phone: phone
+  });
+  if (error) {
+    const errorMessage = error.details.map((err) => err.message).toString();
+    return next({ status: 422, message: errorMessage });
+  }
+  next();
+};
+
 module.exports = {
   signupValidation,
   resetPasswordValidation,
-  updateProfileValidation
+  updateProfileValidation,
+  validatePhoneNumber
 };

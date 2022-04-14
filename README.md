@@ -1,11 +1,10 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <h3 align="center">RESTful API with ExpressJS and MySQL Boilerplate</h3>
+  <h3 align="center">Zwallet Web Service</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
-   
+    An awesome README template to jumpstart your projects!   
   </p>
 </div>
 
