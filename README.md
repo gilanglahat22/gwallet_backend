@@ -4,7 +4,7 @@
   <h3 align="center">Zwallet Web Service</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!   
+    A Web Service and Backend APIs for Zwallet Website Application   
   </p>
 </div>
 
