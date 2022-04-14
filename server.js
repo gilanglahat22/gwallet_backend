@@ -41,7 +41,7 @@ app.use(commonHelper.helperNotFoundMessage);
 // error handling
 app.use(errorHelper.errorHandling);
 
-// will use PORT 3300
+// will use PORT
 app.listen(PORT, () => {
   console.log(`Server is running in PORT ${PORT}`);
 });
