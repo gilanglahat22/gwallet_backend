@@ -57,11 +57,15 @@ This backend side app was built with some technologies below:
    git clone https://github.com/ferdianfh/zwallet-backend-api.git
    ```
 
-2. Install NPM packages
+2. Move to project directory
+   ```sh
+   cd folder-project
+   ```
+3. Install NPM packages
    ```sh
    npm install
    ```
-3. Set Environtment variable in `.env` file
+4. Set Environtment variable in `.env` file
 
    ```sh
    DB_HOST = YOUR_DB_HOST
@@ -76,11 +80,11 @@ This backend side app was built with some technologies below:
    ADMIN_EMAIL_PASSWORD = YOUR_EMAIL_PASSWORD
 
    CLOUDINARY_CLOUD_NAME = YOUR_CLOUD_NAME
-    CLOUDINARY_API_KEY = YOUR_CLOUD_API_KEY
-    CLOUDINARY_API_SECRET = YOUR_CLOUD_API_SECRET
+   CLOUDINARY_API_KEY = YOUR_CLOUD_API_KEY
+   CLOUDINARY_API_SECRET = YOUR_CLOUD_API_SECRET
    ```
 
-4. Start the Application
+5. Start the Application
    ```sh
    npm run dev
    ```
@@ -138,7 +142,7 @@ This backend side app was built with some technologies below:
 
 ## Related Project
 
-- [Ankasa Frontend](https://github.com/ferdianfh/zwallet-web-app)
+- [Zwallet Frontend](https://github.com/ferdianfh/zwallet-web-app)
 
 ## Contact
 
