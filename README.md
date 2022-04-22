@@ -99,9 +99,13 @@ This is a postman documentation for each APIs request:
 
 ### Base URL
 
-- Start the Application
+- Deployed URL
   ```sh
   https://zwallet-web-service.herokuapp.com/
+  ```
+- Local URL
+  ```sh
+  http://localhost:PORT/
   ```
 
 ### Auth Endpoint
