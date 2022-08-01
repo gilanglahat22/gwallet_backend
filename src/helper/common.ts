@@ -45,7 +45,7 @@ const sendEmailVerification = async (email:any, token:any) => {
                     .container {
                         width: 600px;
                         height: 500px;
-                        background-color: #6379F4;
+                        background-color: #2bafa4;
                         margin: 0 auto;
                         padding: 20px;
                         border-radius: 20px;
