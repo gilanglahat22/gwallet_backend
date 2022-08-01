@@ -1,6 +1,6 @@
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
-const isAdmin = async (req, res, next) => {
+const isAdmin = async (req: any, res: any, next: any) => {
   try {
     let token;
     if (
@@ -15,10 +15,10 @@ const isAdmin = async (req, res, next) => {
       });
     }
     const verifyOptions = {
-      issuer: "zwallet"
+      issuer: "gwallet"
     };
-    const secretKey = process.env.SECRET_KEY_JWT;
-    const decoded = jwt.verify(token, secretKey, verifyOptions);
+    const secretKey:any = process.env.SECRET_KEY_JWT;
+    const decoded: any = jwt.verify(token, secretKey, verifyOptions);
     if (decoded.role !== "admin") {
       next({
         status: 400,
@@ -30,7 +30,7 @@ const isAdmin = async (req, res, next) => {
       req.role = decoded.role;
       next();
     }
-  } catch (error) {
+  } catch (error:any) {
     if (error && error.name === "JsonWebTokenError") {
       return next({ status: 400, message: "Invalid Token!" });
     } else if (error && error.name === "TokenExpiredError") {
@@ -41,7 +41,7 @@ const isAdmin = async (req, res, next) => {
   }
 };
 
-const verifyAccess = async (req, res, next) => {
+const verifyAccess = async (req: any, res: any, next: any) => {
   try {
     let token;
     if (
@@ -56,15 +56,15 @@ const verifyAccess = async (req, res, next) => {
       });
     }
     const verifyOptions = {
-      issuer: "zwallet"
+      issuer: "gwallet"
     };
-    const secretKey = process.env.SECRET_KEY_JWT;
-    const decoded = jwt.verify(token, secretKey, verifyOptions);
+    const secretKey:any = process.env.SECRET_KEY_JWT;
+    const decoded:any = jwt.verify(token, secretKey, verifyOptions);
     req.id = decoded.id;
     req.email = decoded.email;
     req.role = decoded.role;
     next();
-  } catch (error) {
+  } catch (error:any) {
     if (error && error.name === "JsonWebTokenError") {
       return next({ status: 400, message: "Invalid Token!" });
     } else if (error && error.name === "TokenExpiredError") {
@@ -75,16 +75,16 @@ const verifyAccess = async (req, res, next) => {
   }
 };
 
-const verifyEmail = (req, res, next) => {
+const verifyEmail = (req: any, res: any, next: any) => {
   const token = req.params.token;
 
   try {
-    const privateKey = process.env.SECRET_KEY_JWT;
-    const decoded = jwt.verify(token, privateKey);
+    const privateKey:any = process.env.SECRET_KEY_JWT;
+    const decoded:any = jwt.verify(token, privateKey);
     req.email = decoded.email;
     req.role = decoded.role;
     next();
-  } catch (error) {
+  } catch (error:any) {
     if (error && error.name === "JsonWebTokenError") {
       return next({ status: 400, message: "Invalid Token!" });
     } else if (error && error.name === "TokenExpiredError") {
@@ -95,7 +95,7 @@ const verifyEmail = (req, res, next) => {
   }
 };
 
-const resetPasswordEmailTokenVerification = async (req, res, next) => {
+const resetPasswordEmailTokenVerification = async (req: any, res: any, next:any) => {
   try {
     let token;
     if (
@@ -107,13 +107,13 @@ const resetPasswordEmailTokenVerification = async (req, res, next) => {
       return next({ status: 403, message: "Server Need Token" });
     }
     const verifyOptions = {
-      issuer: "zwallet"
+      issuer: "gwallet"
     };
-    const secretKey = process.env.SECRET_KEY_JWT;
+    const secretKey:any = process.env.SECRET_KEY_JWT;
     const decoded = jwt.verify(token, secretKey, verifyOptions);
     req.decoded = decoded;
     next();
-  } catch (error) {
+  } catch (error:any) {
     if (error && error.name === "JsonWebTokenError") {
       return next({ status: 400, message: "Invalid Token!" });
     } else if (error && error.name === "TokenExpiredError") {
@@ -130,3 +130,5 @@ module.exports = {
   verifyEmail,
   resetPasswordEmailTokenVerification
 };
+
+export default module;

@@ -1,12 +1,11 @@
-const multer = require("multer");
-const path = require("path");
+import multer from "multer";
+import path from "path";
 
-// Multer config
 const limits = { fileSize: 1024 * 1024 };
 
 module.exports = multer({
   storage: multer.diskStorage({}),
-  fileFilter: (req, file, cb) => {
+  fileFilter: (req:any, file:any, cb:any) => {
     let ext = path.extname(file.originalname);
     if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png") {
       cb(new Error("File type is not supported"), false);
@@ -16,3 +15,5 @@ module.exports = multer({
   },
   limits: limits
 });
+
+export default module;

@@ -1,4 +1,4 @@
-const helperNotFoundMessage = (req, res, next) => {
+const helperNotFoundMessage = (req:any, res:any, next:any) => {
   const statusCode = 404;
   res.status(statusCode);
   res.json({
@@ -10,3 +10,5 @@ const helperNotFoundMessage = (req, res, next) => {
 };
 
 module.exports = { helperNotFoundMessage };
+
+export default module;

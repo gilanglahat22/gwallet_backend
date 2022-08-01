@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const walletController = require("../controller/wallet");
 const { isAdmin, verifyAccess } = require("../middleware/authenticator");
 
@@ -17,3 +17,5 @@ router
   .get("/topup/list", verifyAccess, walletController.topUpList);
 
 module.exports = router;
+
+export default module;

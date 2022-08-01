@@ -1,17 +1,17 @@
-const jwt = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
+import jwt from "jsonwebtoken";
+import nodemailer from "nodemailer";
 
-const generateToken = (payload) => {
-  const secretKey = process.env.SECRET_KEY_JWT;
+const generateToken = (payload:any) => {
+  const secretKey:any = process.env.SECRET_KEY_JWT;
   const verifyOptions = {
     expiresIn: 60 * 60,
-    issuer: "zwallet"
+    issuer: "gwallet"
   };
   const result = jwt.sign(payload, secretKey, verifyOptions);
   return result;
 };
 
-const sendEmailVerification = async (email, token) => {
+const sendEmailVerification = async (email:any, token:any) => {
   const transporter = nodemailer.createTransport({
     host: `smtp.gmail.com`,
     port: 465,
@@ -22,9 +22,9 @@ const sendEmailVerification = async (email, token) => {
     }
   });
   const info = await transporter.sendMail({
-    from: `zwallet.wanda@gmail.com`,
+    from: `gwallet.team`,
     to: email,
-    subject: `Zwallet User Registration Verification`,
+    subject: `Gwallet User Registration Verification`,
     html: `
             <!DOCTYPE html>
             <html lang="en">
@@ -92,14 +92,14 @@ const sendEmailVerification = async (email, token) => {
             <body>
                 <div class="container">
                     <h1 class="title">
-                        Welcome to Zwallet Web App!
+                        Welcome to Gwallet Web App!
                     </h1>
                     <hr />
                     <div class="parag">
                         Thank you for joining us! To continue the signin process, please click the button "Confirm" below to verify you account!
                     </div>
                     <div class="confirm">
-                        <a href="https://zwallet-web-service.herokuapp.com/users/verification/${token}" target="_blank"><button class="form-button">CONFIRM</button></a>
+                        <a href="http://localhost:8000/users/verification/${token}" target="_blank"><button class="form-button">CONFIRM</button></a>
                     </div>
                 </div>
             </body>
@@ -109,7 +109,7 @@ const sendEmailVerification = async (email, token) => {
   console.log(info);
 };
 
-const sendEmailResetPasswordVerification = async (emailTarget, token) => {
+const sendEmailResetPasswordVerification = async (emailTarget: any, token: any) => {
   const transporter = nodemailer.createTransport({
     host: `smtp.gmail.com`,
     port: 465,
@@ -120,9 +120,9 @@ const sendEmailResetPasswordVerification = async (emailTarget, token) => {
     }
   });
   const info = await transporter.sendMail({
-    from: `zwallet.wanda@gmail.com`,
+    from: `Gwallet.team`,
     to: emailTarget,
-    subject: `Zwallet Reset Password Email Verification`,
+    subject: `Gwallet Reset Password Email Verification`,
     html: `
             <!DOCTYPE html>
             <html lang="en">
@@ -200,7 +200,7 @@ const sendEmailResetPasswordVerification = async (emailTarget, token) => {
             <body>
                 <div class="container">
                     <h1 class="title">
-                        Zwallet - Reset Password
+                        Gwallet - Reset Password
                     </h1>
                     <hr />
                     <div class="parag">
@@ -222,3 +222,5 @@ module.exports = {
   sendEmailVerification,
   sendEmailResetPasswordVerification
 };
+
+export default module;

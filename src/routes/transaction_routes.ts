@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const transactionController = require("../controller/transaction");
 const { isAdmin, verifyAccess } = require("../middleware/authenticator");
 
@@ -15,3 +15,5 @@ router
   );
 
 module.exports = router;
+
+export default module;

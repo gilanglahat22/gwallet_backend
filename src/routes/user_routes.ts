@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const upload = require("../utils/multer");
 const userControllers = require("../controller/user");
 const { validatePhoneNumber } = require("../middleware/validator");
@@ -44,3 +44,5 @@ router
   .delete("/profile/:id", isAdmin, userControllers.deleteAccount);
 
 module.exports = router;
+
+export default module;

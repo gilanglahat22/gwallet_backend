@@ -1,7 +1,7 @@
-const Joi = require("joi");
+import Joi from "joi";
 
 // validation for sign up
-const signupValidation = (req, res, next) => {
+const signupValidation = (req: any, res: any, next: any) => {
   const { fullname, email, password, requisite } = req.body;
   const validateData = Joi.object({
     fullname: Joi.string().min(5).max(30).required(),
@@ -9,7 +9,7 @@ const signupValidation = (req, res, next) => {
     password: Joi.string().min(8).max(16).alphanum().required(),
     requisite: Joi.string().required()
   });
-  const { error } = validateData.validate({
+  const { error }:any = validateData.validate({
     fullname: fullname,
     email: email,
     password: password,
@@ -23,13 +23,13 @@ const signupValidation = (req, res, next) => {
   }
 };
 
-const resetPasswordValidation = (req, res, next) => {
+const resetPasswordValidation = (req: any, res: any, next: any) => {
   const { password, confirmPassword } = req.body;
   const validateData = Joi.object({
     password: Joi.string().min(8).max(16).alphanum().required(),
     confirmPassword: Joi.string().min(8).max(16).alphanum().required()
   });
-  const { error } = validateData.validate({
+  const { error }:any = validateData.validate({
     password: password,
     confirmPassword: confirmPassword
   });
@@ -47,7 +47,7 @@ const resetPasswordValidation = (req, res, next) => {
   }
 };
 
-const updateProfileValidation = (req, res, next) => {
+const updateProfileValidation = (req: any, res: any, next: any) => {
   const { email, phone_number, fullname, city, address, post_code } = req.body;
   const validateData = Joi.object({
     email: Joi.string().email().lowercase().required(),
@@ -57,7 +57,7 @@ const updateProfileValidation = (req, res, next) => {
     address: Joi.string().min(5).max(120).required(),
     post_code: Joi.string().min(4).max(6).required().regex(/[0-9]/)
   });
-  const { error } = validateData.validate({
+  const { error }:any = validateData.validate({
     fullname: fullname,
     email: email,
     phone_number: phone_number,
@@ -73,17 +73,17 @@ const updateProfileValidation = (req, res, next) => {
   }
 };
 
-const validatePhoneNumber = (req, res, next) => {
+const validatePhoneNumber = (req: any, res: any, next: any) => {
   const { phone } = req.body;
   const schema = Joi.object({
     phone: Joi.string().min(5).max(16).required().regex(/[0-9]/)
   }).options({ abortEarly: false });
 
-  const { error } = schema.validate({
+  const { error }:any = schema.validate({
     phone: phone
   });
   if (error) {
-    const errorMessage = error.details.map((err) => err.message).toString();
+    const errorMessage = error.details.map((err: any) => err.message).toString();
     return next({ status: 422, message: errorMessage });
   }
   next();
@@ -95,3 +95,5 @@ module.exports = {
   updateProfileValidation,
   validatePhoneNumber
 };
+
+export default module;

@@ -1,12 +1,12 @@
-const { v4: uuidv4 } = require("uuid");
-const bcrypt = require("bcrypt");
+import { v4 as uuidv4 } from "uuid";
+import bcrypt from "bcrypt";
 const walletModels = require("../models/wallet");
 const topupModels = require("../models/topup");
 const userModels = require("../models/user");
 const standardResponse = require("../helper/responseHandling");
 
 // wallet's controller
-const listWallets = async (req, res, next) => {
+const listWallets = async (req:any, res:any, next:any) => {
   try {
     const sort = req.query.sort || "created_at";
     const order = req.query.order || "desc";
@@ -33,20 +33,19 @@ const listWallets = async (req, res, next) => {
         totalPage: Math.ceil(total / limit)
       }
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
 //   top up controllers
-const topUpMethod = async (req, res, next) => {
+const topUpMethod = async (req: any, res: any, next: any) => {
   try {
     const email = req.email;
     const topupMethod = req.body.topup_method;
 
     const [wallet] = await walletModels.searchWallet(email);
-    const walletId = wallet.id;
     const userId = wallet.user_id;
     const topUpId = uuidv4();
     const topUpDate = new Date();
@@ -54,28 +53,27 @@ const topUpMethod = async (req, res, next) => {
     const dataTopUp = {
       id: topUpId,
       user_id: userId,
-      wallet_id: walletId,
       topup_method: topupMethod,
       date: topUpDate
     };
 
-    const result = await topupModels.topUp(dataTopUp);
+    const result:any = await topupModels.topUp(dataTopUp);
     standardResponse.response(
       res,
       dataTopUp,
       200,
       `Top Up record successfully created by user: ${userId}. Top Up Method: ${topupMethod}`
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     console.log(error.stack);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const topUpInput = async (req, res, next) => {
+const topUpInput = async (req:any, res:any, next:any) => {
   try {
-    const email = req.email;
+    const email:any = req.email;
     const id = req.params.id;
     const amountTopUp = parseInt(req.body.amount_topup);
 
@@ -99,7 +97,7 @@ const topUpInput = async (req, res, next) => {
       date: topUpDate
     };
 
-    const result = await topupModels.updateTopUpRecord(dataTopUpInput, topUpId);
+    const result:any = await topupModels.updateTopUpRecord(dataTopUpInput, topUpId);
 
     standardResponse.response(
       res,
@@ -107,14 +105,14 @@ const topUpInput = async (req, res, next) => {
       200,
       `Top Up ${amountTopUp} successfully recorded!`
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     console.log(error.stack);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const topUpConfirmation = async (req, res, next) => {
+const topUpConfirmation = async (req:any, res:any, next:any) => {
   try {
     const email = req.email;
     const id = req.params.id;
@@ -168,11 +166,11 @@ const topUpConfirmation = async (req, res, next) => {
       updated_at: updatedAt
     };
 
-    const walletAfterTopUp = await walletModels.updateWallet(
+    const walletAfterTopUp:any = await walletModels.updateWallet(
       dataWallet,
       walletId
     );
-    const updateTopUpRecord = await topupModels.updateTopUpRecord(
+    const updateTopUpRecord:any = await topupModels.updateTopUpRecord(
       dataTopUpRecord,
       topUpId
     );
@@ -183,14 +181,14 @@ const topUpConfirmation = async (req, res, next) => {
       200,
       `Account with email: ${email} successfully Top Up!`
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     console.log(error.stack);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const topUpHistory = async (req, res, next) => {
+const topUpHistory = async (req:any, res:any, next:any) => {
   try {
     const userId = req.id;
     const sort = req.query.sort || "date";
@@ -219,13 +217,13 @@ const topUpHistory = async (req, res, next) => {
         totalPage: Math.ceil(total / limit)
       }
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const topUpList = async (req, res, next) => {
+const topUpList = async (req:any, res:any, next:any) => {
   try {
     const sort = req.query.sort || "date";
     const order = req.query.order || "desc";
@@ -246,7 +244,7 @@ const topUpList = async (req, res, next) => {
       totalTransaction: total,
       totalPage: Math.ceil(total / limit)
     });
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
@@ -261,3 +259,5 @@ module.exports = {
   topUpHistory,
   topUpList
 };
+
+export default module;

@@ -1,8 +1,8 @@
-const connection = require("../config/dbConfig");
+import connection from "../config/dbConfig";
 
-const createWallet = (wallet) => {
-  return new Promise((resolve, reject) => {
-    connection.query("INSERT INTO wallets SET ?", wallet, (error, result) => {
+const createWallet = (wallet: any) => {
+  return new Promise((resolve: any, reject: any) => {
+    connection.query("INSERT INTO wallets SET ?", wallet, (error: any, result: any) => {
       if (!error) {
         resolve(result);
       } else {
@@ -12,12 +12,12 @@ const createWallet = (wallet) => {
   });
 };
 
-const searchWallet = (email) => {
-  return new Promise((resolve, reject) => {
+const searchWallet = (email: any) => {
+  return new Promise((resolve: any, reject: any) => {
     connection.query(
       "SELECT wallets.user_id, wallets.id, users.email, users.phone, wallets.balance, wallets.income, wallets.expense, wallets.amount_topup, wallets.created_at, wallets.updated_at FROM wallets INNER JOIN users ON wallets.user_id = users.id WHERE email = ?",
       [email],
-      (error, result) => {
+      (error: any, result: any) => {
         if (!error) {
           resolve(result);
         } else {
@@ -28,12 +28,12 @@ const searchWallet = (email) => {
   });
 };
 
-const topUp = (data, userId) => {
-  return new Promise((resolve, reject) => {
+const topUp = (data: any, userId: any) => {
+  return new Promise((resolve: any, reject: any) => {
     connection.query(
       "UPDATE wallets SET ? WHERE user_id = ?",
       [data, userId],
-      (error, result) => {
+      (error: any, result: any) => {
         if (!error) {
           resolve(result);
         } else {
@@ -44,12 +44,12 @@ const topUp = (data, userId) => {
   });
 };
 
-const updateWallet = (data, id) => {
-  return new Promise((resolve, reject) => {
+const updateWallet = (data: any, id: any) => {
+  return new Promise((resolve: any, reject: any) => {
     connection.query(
       "UPDATE wallets SET ? WHERE id = ?",
       [data, id],
-      (error, result) => {
+      (error: any, result: any) => {
         if (!error) {
           resolve(result);
         } else {
@@ -62,12 +62,12 @@ const updateWallet = (data, id) => {
 
 // Query Lainnya
 
-const listWallets = ({ sort, order, limit, offset }) => {
-  return new Promise((resolve, reject) => {
+const listWallets = ( { sort, order, limit, offset}: any ) => {
+  return new Promise((resolve: any, reject: any) => {
     connection.query(
       `SELECT * FROM wallets ORDER BY ?? ${order} LIMIT ? OFFSET ?`,
       [sort, limit, offset],
-      (error, result) => {
+      (error: any, result: any) => {
         if (!error) {
           resolve(result);
         } else {
@@ -78,9 +78,9 @@ const listWallets = ({ sort, order, limit, offset }) => {
   });
 };
 
-const deleteWallet = (id) => {
-  return new Promise((resolve, reject) => {
-    connection.query("DELETE FROM wallet WHERE id = ?", id, (error, result) => {
+const deleteWallet = (id: any) => {
+  return new Promise((resolve: any, reject: any) => {
+    connection.query("DELETE FROM wallets WHERE id = ?", id, (error: any, result: any) => {
       if (!error) {
         resolve(result);
       } else {
@@ -90,12 +90,12 @@ const deleteWallet = (id) => {
   });
 };
 
-const detailsWallet = (id) => {
-  return new Promise((resolve, reject) => {
+const detailsWallet = (id: any) => {
+  return new Promise((resolve: any, reject: any) => {
     connection.query(
       "SELECT * FROM wallets WHERE id = ?",
       id,
-      (error, result) => {
+      (error: any, result: any) => {
         if (!error) {
           resolve(result);
         } else {
@@ -107,10 +107,10 @@ const detailsWallet = (id) => {
 };
 
 const calculateWallet = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve: any, reject: any) => {
     connection.query(
       "SELECT COUNT(*) AS total FROM wallets",
-      (error, result) => {
+      (error: any, result: any) => {
         if (!error) {
           resolve(result);
         } else {
@@ -132,3 +132,5 @@ module.exports = {
   calculateWallet,
   deleteWallet
 };
+
+export default module;

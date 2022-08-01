@@ -1,4 +1,4 @@
-const response = (res, result, status, message, pagination) => {
+const response = (res:any, result:any, status:any, message:any, pagination:any) => {
   const statusMessage = () => {
     if (
       status === 200 ||
@@ -23,3 +23,5 @@ const response = (res, result, status, message, pagination) => {
 };
 
 module.exports = { response };
+
+export default module;

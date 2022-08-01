@@ -1,5 +1,5 @@
-const bcrypt = require("bcrypt");
-const { v4: uuidv4 } = require("uuid");
+import bcrypt from "bcrypt";
+import { v4 as uuidv4 } from "uuid";
 const userModels = require("../models/user");
 const walletModels = require("../models/wallet");
 const standardResponse = require("../helper/responseHandling");
@@ -9,7 +9,7 @@ const commonHelper = require("../helper/common");
 const cloudinary = require("../utils/cloudinary");
 
 // User's Authentication
-const signUp = async (req, res, next) => {
+const signUp = async (req: any, res: any, next: any) => {
   try {
     const { firstName, lastName, email, password } = req.body;
     const userId = uuidv4();
@@ -31,7 +31,7 @@ const signUp = async (req, res, next) => {
       user_id: userId
     };
 
-    const payload = {
+    const payload:any = {
       id: account.id,
       name: `${account.first_name} ${account.last_name}`,
       email: account.email
@@ -42,21 +42,21 @@ const signUp = async (req, res, next) => {
 
     commonHelper.sendEmailVerification(email, token);
 
-    const result = await userModels.createNewAccount(account);
-    const createWallet = await walletModels.createWallet(wallet);
+    const result:any = await userModels.createNewAccount(account);
+    const createWallet:any = await walletModels.createWallet(wallet);
     standardResponse.response(
       res,
       payload,
       200,
       `Registration Success! New account with email: ${account.email} has been created.`
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const login = async (req, res, next) => {
+const login = async (req:any, res:any, next:any) => {
   try {
     const { email, password } = req.body;
     const [account] = await userModels.searchAccount(email);
@@ -66,7 +66,7 @@ const login = async (req, res, next) => {
         message: "Please check your email or password!"
       });
     }
-    const loginData = {
+    const loginData:any = {
       id: account.id,
       email: account.email,
       role: account.role
@@ -87,13 +87,13 @@ const login = async (req, res, next) => {
       200,
       `Account with email: ${account.email} successfully login!`
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const verifyAccount = async (req, res, next) => {
+const verifyAccount = async (req:any, res:any, next:any) => {
   try {
     const email = req.email;
     const updatedAt = new Date();
@@ -103,16 +103,16 @@ const verifyAccount = async (req, res, next) => {
     };
     const result = await userModels.updateAccount(data, email);
     res.redirect(
-      "https://zwallet-web-app.netlify.app/auth/signup/success?account=verified&status=success"
+      "http://localhost:3000/auth/signup/success?account=verified&status=success"
     );
     console.log(result);
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const createPinById = async (req, res, next) => {
+const createPinById = async (req:any, res:any, next:any) => {
   try {
     const id = req.params.id;
     const { PIN } = req.body;
@@ -142,14 +142,14 @@ const createPinById = async (req, res, next) => {
       200,
       "PIN successfully created!"
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
 //   User's Profile
-const profile = async (req, res, next) => {
+const profile = async (req:any, res:any, next:any) => {
   try {
     const email = req.email;
     const [account] = await userModels.detailsAccount(email);
@@ -160,13 +160,13 @@ const profile = async (req, res, next) => {
       200,
       `Profile with email: ${email} successfully requested!`
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const addProfilePicture = async (req, res, next) => {
+const addProfilePicture = async (req:any, res:any, next:any) => {
   try {
     const email = req.email;
     const picture = req.file;
@@ -181,21 +181,21 @@ const addProfilePicture = async (req, res, next) => {
       picture: resultClodinary.secure_url,
       updated_at: updatedAt
     };
-    const result = await userModels.updateAccount(data, email);
+    const result:any = await userModels.updateAccount(data, email);
     standardResponse.response(
       res,
       data,
       200,
       `Profile picture with email: ${email} successfully updated!`
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     console.log(error.stack);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const addPhoneNumber = async (req, res, next) => {
+const addPhoneNumber = async (req:any, res:any, next:any) => {
   try {
     const email = req.email;
     const dataProfile = req.body;
@@ -205,20 +205,20 @@ const addPhoneNumber = async (req, res, next) => {
       updated_at: updatedAt
     };
     // eslint-disable-next-line no-unused-vars
-    const result = await userModels.updateAccount(data, email);
+    const result:any = await userModels.updateAccount(data, email);
     standardResponse.response(
       res,
       data,
       200,
       `Profile phone: ${dataProfile.phone} successfully updated!`
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const deletePhoneNumber = async (req, res, next) => {
+const deletePhoneNumber = async (req:any, res:any, next:any) => {
   try {
     const email = req.email;
     const updatedAt = new Date();
@@ -234,13 +234,13 @@ const deletePhoneNumber = async (req, res, next) => {
       200,
       `Phone number with email: ${email} has been deleted!`
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const changePassword = async (req, res, next) => {
+const changePassword = async (req:any, res:any, next:any) => {
   try {
     const email = req.email;
     const { currentPassword, newPassword, repeatNewPassword } = req.body;
@@ -288,20 +288,20 @@ const changePassword = async (req, res, next) => {
       updated_at: data.updated_at
     };
     // eslint-disable-next-line no-unused-vars
-    const result = await userModels.updateAccount(data, email);
+    const result:any = await userModels.updateAccount(data, email);
     standardResponse.response(
       res,
       dataChangePassword,
       200,
       `Password with email: ${email} successfully updated!`
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const createPIN = async (req, res, next) => {
+const createPIN = async (req:any, res:any, next:any) => {
   try {
     const email = req.email;
     const { PIN } = req.body;
@@ -326,20 +326,20 @@ const createPIN = async (req, res, next) => {
       updated_at: updatedAt
     };
     // eslint-disable-next-line no-unused-vars
-    const result = await userModels.updateAccount(data, email);
+    const result:any = await userModels.updateAccount(data, email);
     standardResponse.response(
       res,
       dataCreatePIN,
       200,
       `Account with email: ${email} successfully created PIN!`
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const confirmationPIN = async (req, res, next) => {
+const confirmationPIN = async (req:any, res:any, next:any) => {
   try {
     const email = req.email;
     const { PIN } = req.body;
@@ -361,14 +361,14 @@ const confirmationPIN = async (req, res, next) => {
       return next({ status: 403, message: "You input the wrong current PIN!" });
     }
     standardResponse.response(res, null, 200, "Your PIN is match!");
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
 // Admin's Authorization and others
-const listAccounts = async (req, res, next) => {
+const listAccounts = async (req:any, res:any, next:any) => {
   try {
     const sort = req.query.sort || "created_at";
     const order = req.query.order || "desc";
@@ -395,13 +395,13 @@ const listAccounts = async (req, res, next) => {
         totalPage: Math.ceil(total / limit)
       }
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const detailsAccount = async (req, res, next) => {
+const detailsAccount = async (req:any, res:any, next:any) => {
   try {
     const userId = req.params.id;
     const [result] = await userModels.searchAccountById(userId);
@@ -411,13 +411,13 @@ const detailsAccount = async (req, res, next) => {
       200,
       `Data Request Success! Details account with id: ${userId}`
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const deleteAccount = async (req, res, next) => {
+const deleteAccount = async (req:any, res:any, next:any) => {
   try {
     const userId = req.params.id;
     const result = await userModels.deleteAccount(userId);
@@ -428,13 +428,13 @@ const deleteAccount = async (req, res, next) => {
       200,
       `Account with id: ${userId} has been deleted.`
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const searchUsers = async (req, res, next) => {
+const searchUsers = async (req:any, res:any, next:any) => {
   try {
     const search = req.query.name;
     const sort = req.query.sort || "created_at";
@@ -458,7 +458,7 @@ const searchUsers = async (req, res, next) => {
       totalAccount: total,
       totalPage: Math.ceil(total / limit)
     });
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
@@ -483,3 +483,5 @@ module.exports = {
   detailsAccount,
   searchUsers
 };
+
+export default module;

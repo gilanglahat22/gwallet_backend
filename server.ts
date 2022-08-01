@@ -1,15 +1,15 @@
 require("dotenv").config();
 const cloudinary = require("./src/utils/cloudinary");
-const express = require("express");
-const morgan = require("morgan");
-const cors = require("cors");
+import express from "express";
+import morgan from "morgan";
+import cors from "cors";
 const commonHelper = require("./src/helper/notFoundHandling");
 const errorHelper = require("./src/helper/errorHandling");
 
 // routes
-const userRoutes = require("./src/routes/user.routes");
-const walletRoutes = require("./src/routes/wallet.routes");
-const transactionRoutes = require("./src/routes/transaction.routes");
+const userRoutes = require("./src/routes/user_routes");
+const walletRoutes = require("./src/routes/wallet_routes");
+const transactionRoutes = require("./src/routes/transaction_routes");
 
 const app = express();
 const PORT = process.env.PORT || 8000;

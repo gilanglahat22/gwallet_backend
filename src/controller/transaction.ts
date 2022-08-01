@@ -1,5 +1,5 @@
-const bcrypt = require("bcrypt");
-const { v4: uuidv4 } = require("uuid");
+import bcrypt from "bcrypt";
+import { v4 as uuidv4 } from "uuid";
 const userModels = require("../models/user");
 const walletModels = require("../models/wallet");
 const transactionModels = require("../models/transaction");
@@ -7,7 +7,7 @@ const standardResponse = require("../helper/responseHandling");
 
 // Transfer Controllers
 
-const transferList = async (req, res, next) => {
+const transferList = async (req: any, res: any, next: any) => {
   try {
     const sort = req.query.sort || "date";
     const order = req.query.order || "desc";
@@ -28,13 +28,13 @@ const transferList = async (req, res, next) => {
       totalTransaction: total,
       totalPage: Math.ceil(total / limit)
     });
-  } catch (error) {
+  } catch (error: any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const transfer = async (req, res, next) => {
+const transfer = async (req: any, res: any, next: any) => {
   try {
     const email = req.email;
     const amountTransfer = parseInt(req.body.amountTransfer);
@@ -93,13 +93,13 @@ const transfer = async (req, res, next) => {
       `Transfer ${amountTransfer} from ${senderEmail} to ${receiverEmail} successfully recorded!`
     );
     console.log(transfer);
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const transferConfirmation = async (req, res, next) => {
+const transferConfirmation = async (req:any, res:any, next:any) => {
   try {
     const email = req.email;
     const id = req.params.id;
@@ -149,11 +149,11 @@ const transferConfirmation = async (req, res, next) => {
     const receiverIncome = receiver.income;
     const receiverEmail = receiver.email;
 
-    const totalSenderBalance = parseInt(senderBalance - amountTransfer);
-    const totalSenderExpense = parseInt(senderExpense + amountTransfer);
+    const totalSenderBalance = senderBalance - amountTransfer;
+    const totalSenderExpense = senderExpense + amountTransfer;
 
-    const totalReceiverBalance = parseInt(receiverBalance + amountTransfer);
-    const totalReceiverIncome = parseInt(receiverIncome + amountTransfer);
+    const totalReceiverBalance = receiverBalance + amountTransfer;
+    const totalReceiverIncome = receiverIncome + amountTransfer;
 
     const dataWalletSender = {
       balance: totalSenderBalance,
@@ -167,7 +167,7 @@ const transferConfirmation = async (req, res, next) => {
     };
     const dataTransfer = {
       status: "Success",
-      updated_at: new Date()
+      date: new Date()
     };
     const walletSender = await walletModels.updateWallet(
       dataWalletSender,
@@ -187,14 +187,14 @@ const transferConfirmation = async (req, res, next) => {
       200,
       `Transfer ${amountTransfer} from ${senderEmail} to ${receiverEmail} success!`
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     console.log(error.stack);
     next({ status: 500, message: "Internal Server Error!" });
   }
 };
 
-const transferHistory = async (req, res, next) => {
+const transferHistory = async (req:any, res:any, next:any) => {
   try {
     const userId = req.id;
     const sort = req.query.sort || "date";
@@ -225,7 +225,7 @@ const transferHistory = async (req, res, next) => {
         totalPage: Math.ceil(total / limit)
       }
     );
-  } catch (error) {
+  } catch (error:any) {
     console.log(error.message);
     next({ status: 500, message: "Internal Server Error!" });
   }
@@ -237,3 +237,5 @@ module.exports = {
   transferConfirmation,
   transferHistory
 };
+
+export default module;
