@@ -92,7 +92,7 @@ const sendEmailVerification = async (email:any, token:any) => {
             <body>
                 <div class="container">
                     <h1 class="title">
-                        Welcome to Gwallet Web App!
+                        Welcome to Gwallet!
                     </h1>
                     <hr />
                     <div class="parag">
