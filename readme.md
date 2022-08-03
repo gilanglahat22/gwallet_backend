@@ -31,7 +31,7 @@ Adapun beberapa teknologi yang dipakai untuk membuat project ini :
 - Nodemon - Download dan Install [Nodemon](https://www.npmjs.com/package/nodemon)
 - MySQL - Download dan Install [MySQL Server](https://www.mysql.com/downloads/)
 
-### Installations
+### How to Use
 
 1. Clone the APIs repo
 
