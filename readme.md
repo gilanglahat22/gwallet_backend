@@ -38,7 +38,6 @@ Adapun beberapa teknologi yang dipakai untuk membuat project ini :
    ```sh
    git clone https://github.com/gilanglahat22/gwallet_backend.git
    ```
-   ```
 2. Install NPM packages
    ```sh
    npm install
