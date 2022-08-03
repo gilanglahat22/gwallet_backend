@@ -124,6 +124,8 @@ Adapun beberapa teknologi yang dipakai untuk membuat project ini :
 | 3   | POST        | transaction/confirmation/:id | Confirm transfer by transferId and user's PIN |
 | 4   | GET         | transaction/history          | Get user transactions by userId               |
 
-## Contact
+## Author
 
-Muhammad Gilang Ramadhan - 13520137 - 13520137@std.stei.itb.ac.id
+- Muhammad Gilang Ramadhan (13520137)
+## Contact
+- 13520137@std.stei.itb.ac.id
