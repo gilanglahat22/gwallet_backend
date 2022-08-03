@@ -11,7 +11,7 @@ BNMO (dibaca: Binomo) adalah sebuah robot video game console yang dimiliki oleh 
 
 ## Design Pattern yang dipakai
 1. Singleton
-- Sebuah objek bisa dikatakan Singleton, apabila hanya memiliki sebuah instance yang digunakan diseluruh kode logic yang dipakai. Oleh Karena itu, pada projek ini program yang dihubungkan ke database hanya membuat satu buah objek. Sehingga program yang dihubunkan ke database mengandung singleton pattern.
+- Sebuah objek bisa dikatakan Singleton, apabila hanya memiliki sebuah instance yang digunakan diseluruh kode logic yang dipakai. Oleh Karena itu, pada projek ini, program yang dihubungkan ke database hanya membuat satu buah objek. Sehingga program yang dihubungkan ke database mengandung singleton pattern.
 2. Object pool
 - Object Pool merupakan pola design pattern yang menggunakan serangkaian objek yang sudah diinisialisasi dan siap digunakan sesuai dengan permintaan. Pada projek ini masing-masing objek yang sudah diinisialisasi siap digunakan sesuai dengan transaksi yang dilakukan.
 3. Facade
