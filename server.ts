@@ -1,8 +1,8 @@
 require("dotenv").config();
 const cloudinary = require("./src/utils/cloudinary");
-import express from "express";
-import morgan from "morgan";
-import cors from "cors";
+const express:any = require("express");
+const morgan:any = require("morgan");
+const cors:any = require("cors");
 const commonHelper = require("./src/helper/notFoundHandling");
 const errorHelper = require("./src/helper/errorHandling");
 
