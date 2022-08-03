@@ -9,6 +9,10 @@ BNMO (dibaca: Binomo) adalah sebuah robot video game console yang dimiliki oleh 
 
 **Gwallet** adalah project yang dibuat untuk menjadi solusi dari permasalahan di atas.
 
+## Design Pattern yang dipakai
+- Object pool
+- Facade
+
 ### Built With
 
 Adapun beberapa teknologi yang dipakai untuk membuat project ini :
