@@ -72,7 +72,7 @@ Adapun beberapa teknologi yang dipakai untuk membuat project ini :
 
 - Deployed URL
   ```sh
-
+  https://gwallet-labpro-2022.herokuapp.com/
   ```
 - Local URL
   ```sh
