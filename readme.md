@@ -10,8 +10,12 @@ BNMO (dibaca: Binomo) adalah sebuah robot video game console yang dimiliki oleh 
 **Gwallet** adalah project yang dibuat untuk menjadi solusi dari permasalahan di atas.
 
 ## Design Pattern yang dipakai
-- Object pool
-- Facade
+1. Singleton
+Sebuah objek bisa dikatakan Singleton, apabila hanya memiliki sebuah instance yang digunakan diseluruh kode logic yang dipakai. Oleh Karena itu, pada projek ini program yang dihubungkan ke database hanya membuat satu buah objek. Sehingga program yang dihubunkan ke database mengandung singleton pattern.
+2. Object pool
+Object Pool merupakan pola design pattern yang menggunakan serangkaian objek yang sudah diinisialisasi dan siap digunakan sesuai dengan permintaan. Pada projek ini masing-masing objek yang sudah diinisialisasi siap digunakan sesuai dengan transaksi yang dilakukan.
+3. Facade
+Pada facade pattern merupakan pola design pattern yang tidak peduli proses apa saja yang dilakukannya untuk memenuhi permintaan yang dilakukan. Pada program ini, pada saat melakukan suatu action baik itu transaksi atau pun yang lain-lain. Sistem akan memanggil action itu saja tanpa melakukan proses didalamnya (karena proses didalamnya akan dikerjakan oleh action itu tanpa harus diketahui oleh yang direquest).
 
 ### Built With
 
