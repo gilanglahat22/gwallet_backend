@@ -25,13 +25,13 @@ Adapun beberapa teknologi yang dipakai untuk membuat project ini :
 
 ## Getting Started
 
-### Prerequisites
+### Requirements
 
 - Node.js - Download dan Install [Node.js](https://nodejs.org/en/).
 - Nodemon - Download dan Install [Nodemon](https://www.npmjs.com/package/nodemon)
 - MySQL - Download dan Install [MySQL Server](https://www.mysql.com/downloads/)
 
-### Installation
+### Installations
 
 1. Clone the APIs repo
 
@@ -123,10 +123,6 @@ Adapun beberapa teknologi yang dipakai untuk membuat project ini :
 | 2   | POST        | transaction/transfer         | Transfer to other user by phone number        |
 | 3   | POST        | transaction/confirmation/:id | Confirm transfer by transferId and user's PIN |
 | 4   | GET         | transaction/history          | Get user transactions by userId               |
-
-## Related Project
-
-- [Frontend](https://github.com/gilanglahat22/gwallet_frontend)
 
 ## Contact
 
